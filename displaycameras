@@ -281,14 +281,12 @@ fi
 for i in ${!camera_names[*]}
 do
         y=$((i-DISPLAY_SEQUENCE-1))
-        if [ "$y" -lt "0" ]; then y=$((y+"${#camera_names[@]}"))
+        if [ "$y" -lt "0" ]; then y=$((y+num_cameras))
         fi
-        if [ "$y" -ge "${#camera_names[@]}" ]; then y=$((y-"${#camera_names[@]}"
-))
+        if [ "$y" -ge "${#camera_names[@]}" ]; then y=$((y-num_cameras))
         fi
         x=$((y+$DISPLAY_SEQUENCE))
-        if [ "$x" -ge "${#camera_names[@]}" ]; then x=$((x-"${#camera_names[@]}"
-))
+        if [ "$x" -ge "${#camera_names[@]}" ]; then x=$((x-num_cameras))
         fi
         eval omxplayer_dbuscontrol "${camera_names[$y]}" setvideopos \"${window_positions[$x]}\"
 done
